@@ -1,0 +1,28 @@
+{
+  "name": "tomollo-skills",
+  "id": "tomollo-skills",
+  "owner": {
+    "name": "zzzyxxx"
+  },
+  "metadata": {
+    "description": "A collection of custom skills for Claude Code",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "tomollo-skills",
+      "source": "./",
+      "description": "Custom skills for Claude Code including Seedpeak workflow",
+      "version": "1.0.0",
+      "author": {
+        "name": "zzzyxxx"
+      },
+      "keywords": [
+        "skills",
+        "claude-code",
+        "workflow"
+      ],
+      "category": "workflow"
+    }
+  ]
+}
