@@ -172,15 +172,7 @@ Read "$CLAUDE_JOB_DIR/polish-work/word/document.xml"
 
 ### 4. 编辑
 
-每次编辑完成后，用 git 提交当前修改，以便后续回滚:
-
-```bash
-cd "$CLAUDE_JOB_DIR/polish-work"
-git add -A
-git commit -m "修改：统一正文字体为宋体小四"
-```
-
-根据操作类型选择策略:
+根据操作类型选择策略。**编辑后不要急于提交**，先进入下一步（重打包）给用户确认。
 
 #### 4a. 全局查找替换
 
@@ -259,7 +251,7 @@ python "$CLAUDE_JOB_DIR/edit.py"
 
 **不打印 XML 内容到终端**（可以打印进度或统计信息）。
 
-### 5. 重打包
+### 5. 重打包 & 确认
 
 ```bash
 cd "$CLAUDE_JOB_DIR/polish-work"
@@ -272,6 +264,19 @@ unzip -l "$CLAUDE_JOB_DIR/thesis-polished.docx" | head -20
 # 复制到目标路径
 cp "$CLAUDE_JOB_DIR/thesis-polished.docx" "/path/to/output.docx"
 ```
+
+**此时暂停，让用户确认修改效果。** 用户打开 .docx 查看后反馈：
+- ✅ **满意** — 用 git 提交本次修改，记录历史
+- ❌ **不满意** — 回到第 4 步（编辑），重新修改，**不提交**
+
+```bash
+# 用户确认满意后执行提交
+cd "$CLAUDE_JOB_DIR/polish-work"
+git add -A
+git commit -m "修改：统一正文字体为宋体小四"
+```
+
+确认后进入下一轮修改时，重复"编辑 → 重打包 → 确认 → 提交"循环。
 
 ### 6. 验证
 
