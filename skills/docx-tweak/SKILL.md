@@ -69,7 +69,25 @@ python -c "print(xml)"    ← 同理禁止
 
 解包目录 `$CLAUDE_JOB_DIR/polish-work/` 就是"工作副本"，编辑对应 XML 文件后即可重打包。只有在处理全新的 .docx 文件时才需要重新解包。
 
-重打包产物是"快照"——每次重打包生成一个独立的 .docx 文件。
+重打包产物是临时验证文件，**始终覆盖同名输出**，不再反复生成新文件。版本差异由解包目录中的 git 保留。
+
+### 输出文件策略：迭代覆盖，按需保存
+
+默认策略——**始终覆盖同一输出文件**，版本由解包目录中的 git 管理：
+
+```
+$CLAUDE_JOB_DIR/thesis-polished.docx     ← 始终同名，每次重打包覆盖
+$CLAUDE_JOB_DIR/polish-work/             ← git 仓库，保留完整修改历史
+  .git/ ← 每次确认后 commit，可回退到任意版本
+```
+
+当用户说"存一份"、"导出一份"时，再复制为命名文件：
+
+```bash
+cp "$CLAUDE_JOB_DIR/thesis-polished.docx" "/path/to/论文_第3版.docx"
+```
+
+这样既保留完整版本历史（git），又避免磁盘上堆满 `_v1`、`_v2`、`_final` 之类无意义的文件。
 
 ### 用户确认 ≠ 全流程结束
 
@@ -285,6 +303,8 @@ python "$CLAUDE_JOB_DIR/edit.py"
 
 ### 5. 重打包 & 确认
 
+始终覆盖同一临时文件：
+
 ```bash
 cd "$CLAUDE_JOB_DIR/polish-work"
 zip -r -q "$CLAUDE_JOB_DIR/thesis-polished.docx" .
@@ -292,9 +312,6 @@ cd -
 
 # 验证
 unzip -l "$CLAUDE_JOB_DIR/thesis-polished.docx" | head -20
-
-# 复制到目标路径
-cp "$CLAUDE_JOB_DIR/thesis-polished.docx" "/path/to/output.docx"
 ```
 
 **此时暂停，让用户确认修改效果。** 用户打开 .docx 查看后反馈：
