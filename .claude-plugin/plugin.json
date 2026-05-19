@@ -1,11 +1,7 @@
 {
   "name": "tomollo-skills",
   "description": "A collection of custom skills for Claude Code",
-<<<<<<< Updated upstream
-  "version": "2.3.0",
-=======
-  "version": "3.0.0",
->>>>>>> Stashed changes
+  "version": "3.1.0",
   "author": {
     "name": "zzzyxxx"
   },
