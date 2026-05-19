@@ -87,22 +87,43 @@ python -c "print(xml)"    ← 同理禁止
 
 ## Git 版本管理（默认）
 
-解包后默认在解包目录中使用 git 管理每次修改，以便随时回退。具体流程见下方详细步骤中的**解包**和**编辑**环节。
+解包目录中独立初始化一个 git 仓库，专门管理 XML 数据文件的版本历史。此仓库与用户的工程项目仓库完全独立，只追踪 `word/document.xml`、`word/styles.xml` 等数据文件。
+
+```
+$CLAUDE_JOB_DIR/polish-work/    ← 独立的 git 仓库
+├── word/
+│   ├── document.xml             ← 正文
+│   ├── styles.xml               ← 样式
+│   ├── header1.xml              ← 页眉
+│   └── ...
+└── ...
+```
+
+每次修改用户确认满意后提交一次，形成一条清晰的修改时间线，方便随时回退。
 
 ---
 
 ## 回滚
 
-回滚本质上就是**把 XML 文件恢复到之前的状态**。所有修改最终都体现在解包目录中的 XML 文件上（`document.xml`、`styles.xml` 等）。恢复旧版本后重打包即可。
-
-默认通过 git 实现：
+回滚本质上就是**把 XML 数据文件恢复到之前的状态**，然后重新打包让用户确认。完整流程：
 
 ```bash
 cd "$CLAUDE_JOB_DIR/polish-work"
-git log --oneline           # 查看修改历史
-git diff --stat HEAD~1      # 查看最近一次改了什么（不打印 XML 内容）
-git checkout <hash> -- .    # 回滚到某次修改后的状态
+
+# 1. 查看修改历史，确认要回到哪一步
+git log --oneline
+git diff --stat <hash>^!   # 查看某次改了什么（不打印 XML 内容）
+
+# 2. 回滚 XML 文件到目标状态
+git checkout <hash> -- .
+
+# 3. 重新打包，让用户确认回滚结果
+zip -r -q "$CLAUDE_JOB_DIR/thesis-rolled-back.docx" .
 ```
+
+用户打开 .docx 确认回滚是否成功：
+- ✅ **满意** — 用 git 提交回滚操作
+- ❌ **不满意** — `git checkout HEAD -- .` 恢复到回滚前
 
 不需要 git 时可直接从原始 .docx 重新解包。
 
