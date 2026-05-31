@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "A collection of custom skills for Claude Code",
-    "version": "5.0.2"
+    "version": "5.1.0"
   },
   "plugins": [
     {
       "name": "tomollo-skills",
       "source": "./",
       "description": "Custom skills for Claude Code including Seedpeak, Docx Tweak, Iter Mini, proj-mini, and Skill Forge",
-      "version": "5.0.2",
+      "version": "5.1.0",
       "author": {
         "name": "zzzyxxx"
       },
