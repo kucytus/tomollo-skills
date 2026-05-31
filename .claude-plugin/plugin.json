@@ -1,11 +1,11 @@
 {
   "name": "tomollo-skills",
   "description": "A collection of custom skills for Claude Code",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "author": {
     "name": "zzzyxxx"
   },
   "license": "MIT",
   "keywords": ["skills", "claude-code", "workflow", "docx"],
-  "skills": ["./skills/seedpeak", "./skills/docx-tweak", "./skills/iter-mini", "./skills/proj-mini"]
+  "skills": ["./skills/seedpeak", "./skills/docx-tweak", "./skills/iter-mini", "./skills/proj-mini", "./skills/skill-forge"]
 }
