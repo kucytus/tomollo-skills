@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "A collection of custom skills for Claude Code",
-    "version": "5.0.0"
+    "version": "5.0.1"
   },
   "plugins": [
     {
       "name": "tomollo-skills",
       "source": "./",
-      "description": "Custom skills for Claude Code including Seedpeak, Docx Tweak, Iter Mini, and proj-mini",
-      "version": "5.0.0",
+      "description": "Custom skills for Claude Code including Seedpeak, Docx Tweak, Iter Mini, proj-mini, and Skill Forge",
+      "version": "5.0.1",
       "author": {
         "name": "zzzyxxx"
       },
@@ -23,7 +23,8 @@
         "workflow",
         "docx",
         "iter-mini",
-        "proj-mini"
+        "proj-mini",
+        "skill-forge"
       ],
       "category": "workflow"
     }
