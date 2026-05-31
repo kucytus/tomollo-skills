@@ -1,6 +1,13 @@
 ---
 name: skill-forge
-description: Skill authoring standards and conventions for this project. Use when writing or reviewing a SKILL.md to ensure it follows project conventions: directory structure, writing style, type classification (silent/process), frontmatter format, progressive disclosure patterns. Not a skill generator — a reference document that defines what well-written skills look like. Consult when the user says "write a skill", "review this skill", "what should a skill look like", "skill conventions", "skill format".
+description: >-
+  Skill authoring standards and conventions for this project. Use when writing
+  or reviewing a SKILL.md to ensure it follows project conventions: directory
+  structure, writing style, type classification (silent/process), frontmatter
+  format, progressive disclosure patterns. Not a skill generator — a reference
+  document that defines what well-written skills look like. Consult when the
+  user says "write a skill", "review this skill", "what should a skill look
+  like", "skill conventions", "skill format".
 ---
 
 # Skill Standards
